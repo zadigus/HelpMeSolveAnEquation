@@ -13,12 +13,16 @@ ApplicationWindow {
   height: 480
   visible: true
 
-  EquationItem {
+  /*EquationItem {
     id: equationItem
     anchors.centerIn: parent
     width: 100
     height: 100
     text: "2*x-x/19+4"
     color: "blue"
+  }*/
+
+  Polynom {
+    id: polynom
   }
 }

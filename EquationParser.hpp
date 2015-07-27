@@ -5,7 +5,7 @@
 
 namespace EquationParser
 {
-  EquationItem* parseExpression(const QString& a_Eqn, int& a_Pos);
+  EquationItem* parseExpression(const QString& a_Eqn, int& a_Pos, EquationItem* a_Parent = 0);
   EquationItem* parseTerm(const QString& a_Eqn, int& a_Pos, EquationItem* a_Parent);
   EquationItem* parseFactor(const QString& a_Eqn, int& a_Pos, EquationItem* a_Parent);
 }

@@ -6,11 +6,13 @@
 
 #include "EquationParser.hpp"
 #include "EquationItem.hpp"
+#include "Polynom.hpp"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    qmlRegisterType<Polynom>("EquationSolver", 1, 0, "Polynom");
     qmlRegisterType<EquationItem>("EquationSolver", 1, 0, "EquationItem");
 
     QQmlApplicationEngine engine;

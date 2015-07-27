@@ -3,13 +3,14 @@
 
 #include <QObject>
 #include <QtQuick/QQuickPaintedItem>
+#include <functional>
 
 class EquationItem : public QQuickPaintedItem
 {
     Q_OBJECT
 
     Q_PROPERTY(QString text READ text WRITE setText)
-    Q_PROPERTY(QColor color READ color WRITE setColor)
+    Q_PROPERTY(QColor borderColor READ borderColor WRITE setBorderColor)
 
   public:
     EquationItem(QQuickItem* a_Parent = 0);
@@ -23,8 +24,17 @@ class EquationItem : public QQuickPaintedItem
 
     void setOp(const QChar& a_Op);
 
-    void setColor(const QColor& a_Color);
-    QColor color() const;
+    void setBorderColor(const QColor& a_Color);
+    QColor borderColor() const;
+
+  private:
+    void setSize();
+
+  public:
+    static const qreal m_DEFAULT_WIDTH = 100;
+    static const qreal m_DEFAULT_HEIGHT = 50;
+    static const qreal m_VERTICAL_MARGIN = 10;
+    static const qreal m_HORIZONTAL_MARGIN = 10;
 
   private:
     QString m_Text;
@@ -32,9 +42,28 @@ class EquationItem : public QQuickPaintedItem
     QColor m_Color;
 };
 
+class AddItemWidth : public std::binary_function<qreal, QQuickItem*, qreal>
+{
+  public:
+    qreal operator()(qreal a_TotalWidth, QQuickItem* a_Item) const;
+};
+
+class AddItemHeight : public std::binary_function<qreal, QQuickItem*, qreal>
+{
+  public:
+    qreal operator()(qreal a_TotalHeight, QQuickItem* a_Item) const;
+};
+
+// inline methods
+
 inline QString EquationItem::text() const
 {
   return m_Text;
 }
+
+// non-member functions
+
+qreal childrenWidth(EquationItem* a_Item);
+qreal childrenHeight(EquationItem* a_Item);
 
 #endif // EQUATIONITEM_HPP

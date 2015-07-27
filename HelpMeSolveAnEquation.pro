@@ -4,7 +4,8 @@ QT += qml quick widgets
 
 SOURCES += main.cpp \
     EquationItem.cpp \
-    EquationParser.cpp
+    EquationParser.cpp \
+    Polynom.cpp
 
 RESOURCES += qml.qrc
 
@@ -16,4 +17,5 @@ include(deployment.pri)
 
 HEADERS += \
     EquationItem.hpp \
-    EquationParser.hpp
+    EquationParser.hpp \
+    Polynom.hpp

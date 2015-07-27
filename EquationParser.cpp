@@ -4,9 +4,9 @@
 
 namespace EquationParser {
 
-  EquationItem* parseExpression(const QString& a_Eqn, int& a_Pos) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
+  EquationItem* parseExpression(const QString& a_Eqn, int& a_Pos, EquationItem* a_Parent) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
   {
-    EquationItem* exprItem = new EquationItem();
+    EquationItem* exprItem = new EquationItem(a_Parent);
 
     // the first item has default operation + (any '-' sign should be read by the parseFactor method and would then update the EquationItem accordingly)
     EquationItem* termItem(parseTerm(a_Eqn, a_Pos, exprItem));
@@ -60,11 +60,7 @@ namespace EquationParser {
 
   EquationItem* parseFactor(const QString& a_Eqn, int& a_Pos, EquationItem* a_Parent)
   {
-    // the factor is either x or any number
-    // TODO: the factor may also be a fraction or may contain parentheses like (-5) or (-x)
-    // TODO: maybe use QVariant instead of QString for the error handling
-
-    EquationItem* eqnItem = new EquationItem(a_Parent);
+    EquationItem* eqnItem = new EquationItem(a_Parent); // TODO: deal with the possibility that there is no factor ==> null pointer
 
     if(a_Eqn[a_Pos] == 'x')
     {
@@ -82,6 +78,8 @@ namespace EquationParser {
       }
       eqnItem->setText(result);
     }
+
+//    a_Parent->
 
     // TODO: update the parent's sign if the factor is of the form (-x) or (-5) because the term's default sign is '+'
     return eqnItem;
