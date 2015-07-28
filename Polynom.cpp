@@ -5,7 +5,6 @@
 Polynom::Polynom(QQuickItem* a_Parent)
   : QQuickItem(a_Parent)
   , m_EqnItem(new EquationItem(this))
-//  , m_EqnItem2(new EquationItem(m_EqnItem))
 {
   m_EqnItem->setText("Hahaha");
   m_EqnItem->setWidth(100);
