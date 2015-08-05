@@ -5,7 +5,7 @@
 #include <QtQuick/QQuickPaintedItem>
 #include <functional>
 
-class EquationItem : public QQuickPaintedItem
+class MonomialItem : public QQuickPaintedItem
 {
     Q_OBJECT
 
@@ -13,8 +13,8 @@ class EquationItem : public QQuickPaintedItem
     Q_PROPERTY(QColor borderColor READ borderColor WRITE setBorderColor)
 
   public:
-    EquationItem(QQuickItem* a_Parent = 0);
-    virtual ~EquationItem();
+    MonomialItem(QQuickItem* a_Parent = 0);
+    virtual ~MonomialItem();
 
     virtual void paint(QPainter* a_Painter);
 
@@ -56,14 +56,14 @@ class AddItemHeight : public std::binary_function<qreal, QQuickItem*, qreal>
 
 // inline methods
 
-inline QString EquationItem::text() const
+inline QString MonomialItem::text() const
 {
   return m_Text;
 }
 
 // non-member functions
 
-qreal childrenWidth(EquationItem* a_Item);
-qreal childrenHeight(EquationItem* a_Item);
+qreal childrenWidth(MonomialItem* a_Item);
+qreal childrenHeight(MonomialItem* a_Item);
 
 #endif // EQUATIONITEM_HPP

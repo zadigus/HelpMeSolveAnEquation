@@ -5,15 +5,15 @@
 #include <QDebug>
 
 #include "EquationParser.hpp"
-#include "EquationItem.hpp"
-#include "Polynom.hpp"
+#include "MonomialItem.hpp"
+#include "PolynomialItem.hpp"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    qmlRegisterType<Polynom>("EquationSolver", 1, 0, "Polynom");
-    qmlRegisterType<EquationItem>("EquationSolver", 1, 0, "EquationItem");
+    qmlRegisterType<PolynomialItem>("EquationSolver", 1, 0, "Polynomial");
+//    qmlRegisterType<MonomialItem>("EquationSolver", 1, 0, "Monomial");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

@@ -1,13 +1,13 @@
 #ifndef EQUATIONPARSER_H
 #define EQUATIONPARSER_H
 
-#include "EquationItem.hpp"
+#include "MonomialItem.hpp"
 
 namespace EquationParser
 {
-  EquationItem* parseExpression(const QString& a_Eqn, int& a_Pos, EquationItem* a_Parent = 0);
-  EquationItem* parseTerm(const QString& a_Eqn, int& a_Pos, EquationItem* a_Parent);
-  EquationItem* parseFactor(const QString& a_Eqn, int& a_Pos, EquationItem* a_Parent);
+  MonomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent = 0);
+  MonomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent);
+  MonomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent);
 }
 
 #endif // EQUATIONPARSER_H
