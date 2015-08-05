@@ -1,8 +1,8 @@
-#include "EquationParser.hpp"
+#include "PolynomialParser.hpp"
 
 #include <QDebug>
 
-namespace EquationParser {
+namespace PolynomialParser {
 
   MonomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
   {

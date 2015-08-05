@@ -4,19 +4,16 @@
 #include <QQmlComponent>
 #include <QDebug>
 
-#include "EquationParser.hpp"
-#include "MonomialItem.hpp"
 #include "PolynomialItem.hpp"
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+  QApplication app(argc, argv);
 
-    qmlRegisterType<PolynomialItem>("EquationSolver", 1, 0, "Polynomial");
-//    qmlRegisterType<MonomialItem>("EquationSolver", 1, 0, "Monomial");
+  qmlRegisterType<PolynomialItem>("EquationSolver", 1, 0, "Polynomial");
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+  QQmlApplicationEngine engine;
+  engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    return app.exec();
+  return app.exec();
 }

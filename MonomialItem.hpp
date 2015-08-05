@@ -1,5 +1,5 @@
-#ifndef EQUATIONITEM_HPP
-#define EQUATIONITEM_HPP
+#ifndef MONOMIALITEM_HPP
+#define MONOMIALITEM_HPP
 
 #include <QObject>
 #include <QtQuick/QQuickPaintedItem>
@@ -66,4 +66,4 @@ inline QString MonomialItem::text() const
 qreal childrenWidth(MonomialItem* a_Item);
 qreal childrenHeight(MonomialItem* a_Item);
 
-#endif // EQUATIONITEM_HPP
+#endif // MONOMIALITEM_HPP

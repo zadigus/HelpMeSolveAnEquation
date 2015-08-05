@@ -1,5 +1,5 @@
-#ifndef POLYNOM_H
-#define POLYNOM_H
+#ifndef POLYNOMIALITEM_H
+#define POLYNOMIALITEM_H
 
 #include <QObject>
 #include <QtQuick/QQuickItem>
@@ -22,4 +22,4 @@ class PolynomialItem : public QQuickItem
     MonomialItem* m_EqnItem;
 };
 
-#endif // POLYNOM_H
+#endif // POLYNOMIALITEM_H

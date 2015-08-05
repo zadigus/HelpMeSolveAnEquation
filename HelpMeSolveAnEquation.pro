@@ -3,9 +3,9 @@ TEMPLATE = app
 QT += qml quick widgets
 
 SOURCES += main.cpp \
-    EquationParser.cpp \
     MonomialItem.cpp \
-    PolynomialItem.cpp
+    PolynomialItem.cpp \
+    PolynomialParser.cpp
 
 RESOURCES += qml.qrc
 
@@ -16,6 +16,6 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    EquationParser.hpp \
     MonomialItem.hpp \
-    PolynomialItem.hpp
+    PolynomialItem.hpp \
+    PolynomialParser.hpp
