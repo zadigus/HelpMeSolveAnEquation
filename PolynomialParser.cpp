@@ -12,7 +12,7 @@ namespace PolynomialParser {
     MonomialItem* termItem(parseTerm(a_Eqn, a_Pos, exprItem));
     termItem->setOp('+');
 
-    while(a_Eqn[a_Pos] != QChar::Null)
+    while(a_Pos < a_Eqn.size() && a_Eqn[a_Pos] != QChar::Null)
     {
       QChar op(a_Eqn[a_Pos]);
       qWarning() << "parseExpression::Operator " << op.toLatin1();
@@ -39,7 +39,7 @@ namespace PolynomialParser {
     MonomialItem* factorItem(parseFactor(a_Eqn, a_Pos, termItem));
     factorItem->setOp('*');
 
-    while(a_Eqn[a_Pos] != QChar::Null)
+    while(a_Pos < a_Eqn.size() && a_Eqn[a_Pos] != QChar::Null)
     {
       QChar op(a_Eqn[a_Pos]);
       qWarning() << "parseTerm::Operator " << op.toLatin1();
@@ -71,7 +71,7 @@ namespace PolynomialParser {
     else
     {
       QString result;
-      while(a_Eqn[a_Pos].isDigit() || a_Eqn[a_Pos] == '.')
+      while(a_Pos < a_Eqn.size() && (a_Eqn[a_Pos].isDigit() || a_Eqn[a_Pos] == '.'))
       {
         qWarning() << a_Eqn[a_Pos].toLatin1();
         result += a_Eqn[a_Pos++];

@@ -4,6 +4,7 @@
 #include <QPainter>
 
 #include <numeric>
+#include <algorithm>
 
 MonomialItem::MonomialItem(QQuickItem *a_Parent)
   : QQuickPaintedItem(a_Parent)
@@ -25,19 +26,43 @@ void MonomialItem::paint(QPainter* a_Painter)
   a_Painter->drawRect(0, 0, width(), height());
 }
 
-void MonomialItem::setSize()
+void MonomialItem::updateGeometry()
 {
+  QList<QQuickItem*> children(childItems());
+  std::for_each(children.begin(), children.end(),
+                [] (QQuickItem* a_Item)
+                {
+                  MonomialItem* item(qobject_cast<MonomialItem*>(a_Item));
+                  if(item)
+                  {
+                    item->updateGeometry();
+                  }
+                });
+
   qreal w(childrenWidth(this));
   qreal h(childrenHeight(this));
 
-  setWidth(w + m_HORIZONTAL_MARGIN);
-  setHeight(h + m_VERTICAL_MARGIN);
+  if(w != 0 && h!= 0)
+  {
+    qreal totalWidth = w +                                            // total width of the children
+                       (children.size() - 1) * m_HORIZONTAL_OFFSET +  // space between the children
+                       2 * m_HORIZONTAL_MARGIN;                       // space between the first child and my boundary
+                                                                      // + space between the last child and my boundary
+    qreal totalHeight = h +                                           // maximal height of the children
+                        2 * m_VERTICAL_MARGIN;                        // space between the children and my boundary (top + bottom)
+    setWidth(totalWidth);
+    setHeight(totalHeight);
+  }
+  else
+  {
+    setWidth(m_DEFAULT_WIDTH); // TODO: replace with the size of the text
+    setHeight(m_DEFAULT_HEIGHT);
+  }
 }
 
 void MonomialItem::setText(const QString& a_Text)
 {
   m_Text = a_Text;
-  // TODO: this method must update the rectangle's width / height
 }
 
 QColor MonomialItem::borderColor() const // TODO: this is the border color; the brush is responsible for the background color
@@ -55,28 +80,30 @@ void MonomialItem::setOp(const QChar& a_Op)
   m_Op = a_Op;
 }
 
-qreal AddItemWidth::operator()(qreal a_TotalWidth, QQuickItem* a_Item) const
-{
-  return a_TotalWidth + a_Item->width();
-}
-
-qreal AddItemHeight::operator()(qreal a_TotalHeight, QQuickItem* a_Item) const
-{
-  return a_TotalHeight + a_Item->height();
-}
-
 // non-member functions
 
 qreal childrenWidth(MonomialItem* a_Item)
 {
   QList<QQuickItem*> children(a_Item->childItems());
-  qreal width(std::accumulate(children.begin(), children.end(), 0, AddItemWidth()));
-  return width == 0 ? MonomialItem::m_DEFAULT_WIDTH : width;
+  qreal width(std::accumulate(children.begin(), children.end(), 0,
+                              [] (qreal a_TotalWidth, QQuickItem* a_Item)
+                              {
+                                return a_TotalWidth + a_Item->width();
+                              }));
+  return width;
 }
 
 qreal childrenHeight(MonomialItem* a_Item)
 {
   QList<QQuickItem*> children(a_Item->childItems());
-  qreal height(std::accumulate(children.begin(), children.end(), 0, AddItemHeight()));
-  return height == 0 ? MonomialItem::m_DEFAULT_HEIGHT : height;
+  QList<QQuickItem*>::iterator it(std::max_element(children.begin(), children.end(),
+                                                   [] (QQuickItem* a_LeftItem, QQuickItem* a_RightItem)
+                                                   {
+                                                    return a_LeftItem->height() < a_RightItem->height();
+                                                   }));
+  if(it != children.end())
+  {
+    return (*it)->height();
+  }
+  return 0;
 }

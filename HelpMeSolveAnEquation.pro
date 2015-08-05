@@ -19,3 +19,5 @@ HEADERS += \
     MonomialItem.hpp \
     PolynomialItem.hpp \
     PolynomialParser.hpp
+
+CONFIG += c++11
