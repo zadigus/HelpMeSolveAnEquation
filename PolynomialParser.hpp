@@ -1,13 +1,13 @@
 #ifndef POLYNOMIALPARSER_H
 #define POLYNOMIALPARSER_H
 
-#include "MonomialItem.hpp"
+#include "PolynomialItem.hpp"
 
 namespace PolynomialParser
 {
-  MonomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent = 0);
-  MonomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent);
-  MonomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent);
+  PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent = 0);
+  PolynomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent);
+  PolynomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent);
 }
 
 #endif // POLYNOMIALPARSER_H

@@ -13,7 +13,7 @@ ApplicationWindow {
   height: 480
   visible: true
 
-  Polynomial {
-    id: polynomial
+  EqnSideItem {
+    id: equation_side
   }
 }

@@ -4,13 +4,13 @@
 #include <QQmlComponent>
 #include <QDebug>
 
-#include "PolynomialItem.hpp"
+#include "EqnSideItem.hpp"
 
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
 
-  qmlRegisterType<PolynomialItem>("EquationSolver", 1, 0, "Polynomial");
+  qmlRegisterType<EqnSideItem>("EquationSolver", 1, 0, "EqnSideItem");
 
   QQmlApplicationEngine engine;
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

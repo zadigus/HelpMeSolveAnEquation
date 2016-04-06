@@ -4,12 +4,12 @@
 
 namespace PolynomialParser {
 
-  MonomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
+  PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
   {
-    MonomialItem* exprItem = new MonomialItem(a_Parent);
+    PolynomialItem* exprItem = new PolynomialItem(a_Parent);
 
     // the first item has default operation + (any '-' sign should be read by the parseFactor method and would then update the EquationItem accordingly)
-    MonomialItem* termItem(parseTerm(a_Eqn, a_Pos, exprItem));
+    PolynomialItem* termItem(parseTerm(a_Eqn, a_Pos, exprItem));
     termItem->setOp('+');
 
     while(a_Pos < a_Eqn.size() && a_Eqn[a_Pos] != QChar::Null)
@@ -31,12 +31,12 @@ namespace PolynomialParser {
     return exprItem;
   }
 
-  MonomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent)
+  PolynomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent)
   {
-    MonomialItem* termItem = new MonomialItem(a_Parent);
+    PolynomialItem* termItem = new PolynomialItem(a_Parent);
 
     // the first item has default operation *
-    MonomialItem* factorItem(parseFactor(a_Eqn, a_Pos, termItem));
+    PolynomialItem* factorItem(parseFactor(a_Eqn, a_Pos, termItem));
     factorItem->setOp('*');
 
     while(a_Pos < a_Eqn.size() && a_Eqn[a_Pos] != QChar::Null)
@@ -58,9 +58,9 @@ namespace PolynomialParser {
     return termItem;
   }
 
-  MonomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, MonomialItem* a_Parent)
+  PolynomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent)
   {
-    MonomialItem* eqnItem = new MonomialItem(a_Parent); // TODO: deal with the possibility that there is no factor ==> null pointer
+    PolynomialItem* eqnItem = new PolynomialItem(a_Parent); // TODO: deal with the possibility that there is no factor ==> null pointer
 
     if(a_Eqn[a_Pos] == 'x')
     {
