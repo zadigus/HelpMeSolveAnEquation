@@ -7,7 +7,7 @@ SOURCES += main.cpp \
     logic/EqnItems/EqnSideItem.cpp \
     logic/Parser/PolynomialParser.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += gui/qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
