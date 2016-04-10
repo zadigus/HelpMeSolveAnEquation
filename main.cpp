@@ -4,7 +4,7 @@
 #include <QQmlComponent>
 #include <QDebug>
 
-#include "EqnSideItem.hpp"
+#include "EqnItems/EqnSideItem.hpp"
 
 int main(int argc, char *argv[])
 {

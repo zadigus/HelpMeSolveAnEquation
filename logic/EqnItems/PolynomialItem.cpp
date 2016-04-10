@@ -1,4 +1,4 @@
-#include "PolynomialItem.hpp"
+#include "EqnItems/PolynomialItem.hpp"
 
 #include <QPen>
 #include <QPainter>

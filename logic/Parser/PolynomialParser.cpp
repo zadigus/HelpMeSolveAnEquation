@@ -1,4 +1,4 @@
-#include "PolynomialParser.hpp"
+#include "Parser/PolynomialParser.hpp"
 
 #include <QDebug>
 

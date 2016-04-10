@@ -1,7 +1,8 @@
-#include "EqnSideItem.hpp"
+#include "EqnItems/EqnSideItem.hpp"
 
-#include "PolynomialItem.hpp"
-#include "PolynomialParser.hpp"
+#include "EqnItems/PolynomialItem.hpp"
+
+#include "Parser/PolynomialParser.hpp"
 
 EqnSideItem::EqnSideItem(QQuickItem* a_Parent)
   : QQuickItem(a_Parent)

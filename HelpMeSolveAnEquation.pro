@@ -3,9 +3,9 @@ TEMPLATE = app
 QT += qml quick widgets
 
 SOURCES += main.cpp \
-    PolynomialParser.cpp \
-    EqnSideItem.cpp \
-    PolynomialItem.cpp
+    logic/EqnItems/PolynomialItem.cpp \
+    logic/EqnItems/EqnSideItem.cpp \
+    logic/Parser/PolynomialParser.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,9 +15,11 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-HEADERS += \
-    PolynomialParser.hpp \
-    EqnSideItem.hpp \
-    PolynomialItem.hpp
-
 CONFIG += c++11
+
+HEADERS += \
+    logic/EqnItems/PolynomialItem.hpp \
+    logic/EqnItems/EqnSideItem.hpp \
+    logic/Parser/PolynomialParser.hpp
+
+INCLUDEPATH += logic

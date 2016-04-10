@@ -1,7 +1,7 @@
 #ifndef POLYNOMIALPARSER_H
 #define POLYNOMIALPARSER_H
 
-#include "PolynomialItem.hpp"
+#include "EqnItems/PolynomialItem.hpp"
 
 namespace PolynomialParser
 {
