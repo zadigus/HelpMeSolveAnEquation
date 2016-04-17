@@ -1,12 +1,14 @@
-#include "Parser/PolynomialParser.hpp"
+#include "Builders/EqnItemTreeBuilder.hpp"
 
 #include <QDebug>
 
-namespace PolynomialParser {
+namespace EqnItemTreeBuilder {
 
-  PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
+  //------------------------------------------------------------------------------------------------------
+  PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, QQuickItem* a_Parent) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
   {
     PolynomialItem* exprItem = new PolynomialItem(a_Parent);
+    exprItem->setBorderColor(QColor("blue"));
 
     // the first item has default operation + (any '-' sign should be read by the parseFactor method and would then update the EquationItem accordingly)
     PolynomialItem* termItem(parseTerm(a_Eqn, a_Pos, exprItem));
@@ -26,14 +28,14 @@ namespace PolynomialParser {
       termItem->setOp(op);
     }
 
-    // TODO: set the expression's m_Text somehow; maybe here or maybe in the EquationItem itself (it can deduce that text from its children)
-    // this may also not be necessary, since the text can be deduced from the children
     return exprItem;
   }
 
+  //------------------------------------------------------------------------------------------------------
   PolynomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent)
   {
     PolynomialItem* termItem = new PolynomialItem(a_Parent);
+    termItem->setBorderColor(QColor("green"));
 
     // the first item has default operation *
     PolynomialItem* factorItem(parseFactor(a_Eqn, a_Pos, termItem));
@@ -53,14 +55,14 @@ namespace PolynomialParser {
       factorItem->setOp(op);
     }
 
-    // TODO: set the term's m_Text somehow; maybe here or maybe in the EquationItem itself (it can deduce that text from its children)
-    // this may also not be necessary, since the text can be deduced from the children
     return termItem;
   }
 
+  //------------------------------------------------------------------------------------------------------
   PolynomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent)
   {
     PolynomialItem* eqnItem = new PolynomialItem(a_Parent); // TODO: deal with the possibility that there is no factor ==> null pointer
+    eqnItem->setBorderColor(QColor("red"));
 
     if(a_Eqn[a_Pos] == 'x')
     {
@@ -78,8 +80,6 @@ namespace PolynomialParser {
       }
       eqnItem->setText(result);
     }
-
-//    a_Parent->
 
     // TODO: update the parent's sign if the factor is of the form (-x) or (-5) because the term's default sign is '+'
     return eqnItem;

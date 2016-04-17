@@ -1,13 +1,13 @@
-#ifndef POLYNOMIALPARSER_H
-#define POLYNOMIALPARSER_H
+#ifndef EQNTREEBUILDER_H
+#define EQNTREEBUILDER_H
 
 #include "EqnItems/PolynomialItem.hpp"
 
-namespace PolynomialParser
+namespace EqnItemTreeBuilder
 {
-  PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent = 0);
+  PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, QQuickItem* a_Parent = 0);
   PolynomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent);
   PolynomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent);
 }
 
-#endif // POLYNOMIALPARSER_H
+#endif // EQNTREEBUILDER_H
