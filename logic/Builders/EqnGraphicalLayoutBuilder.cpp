@@ -11,6 +11,8 @@
 
 //}
 
+// TODO: this should all be done in a QML script
+
 namespace EqnGraphicalLayoutBuilder {
 
   //------------------------------------------------------------------------------------------------------
