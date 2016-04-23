@@ -4,16 +4,20 @@ import QtQuick.Controls.Styles 1.2
 import QtQuick.Window 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
-import EquationSolver 1.0
 
-ApplicationWindow {
-  id: myWindow
-  title: qsTr("How to solve an equation?")
-  width: 640
-  height: 480
-  visible: true
+ApplicationWindow
+{
+    id: myWindow
+    title: qsTr("How to solve an equation?")
+    width: 640
+    height: 480
+    visible: true
 
-  EqnSideItem {
-    id: equation_side
-  }
+    EqnSideItem
+    {
+        id: left_side
+
+        polynom: "2*x-7"
+        polynomPosition: "50, 50"
+    }
 }

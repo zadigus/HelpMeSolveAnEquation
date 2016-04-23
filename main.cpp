@@ -6,6 +6,8 @@
 
 #include "EqnItems/EqnSideItem.hpp"
 
+using namespace N_EqnItems;
+
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);

@@ -3,6 +3,8 @@
 
 #include "EqnItems/PolynomialItem.hpp"
 
+using namespace N_EqnItems;
+
 namespace EqnItemTreeBuilder
 {
   PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, QQuickItem* a_Parent = 0);

@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>EqnSideItem.qml</file>
     </qresource>
 </RCC>

@@ -2,14 +2,14 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-EQNITEMS_FOLDER = logic/EqnItems
+EQNITEMS_FOLDER = gui/EqnItems
 PARSER_FOLDER   = logic/Builders
 
 SOURCES += main.cpp \
     $${EQNITEMS_FOLDER}/PolynomialItem.cpp \
     $${EQNITEMS_FOLDER}/EqnSideItem.cpp \
     $${PARSER_FOLDER}/EqnItemTreeBuilder.cpp \
-    logic/Builders/EqnGraphicalLayoutBuilder.cpp
+    $${PARSER_FOLDER}/EqnGraphicalLayoutBuilder.cpp
 
 RESOURCES += gui/qml.qrc
 
@@ -25,6 +25,7 @@ HEADERS += \
     $${EQNITEMS_FOLDER}/PolynomialItem.hpp \
     $${EQNITEMS_FOLDER}/EqnSideItem.hpp \
     $${PARSER_FOLDER}/EqnItemTreeBuilder.hpp \
-    logic/Builders/EqnGraphicalLayoutBuilder.hpp
+    $${PARSER_FOLDER}/EqnGraphicalLayoutBuilder.hpp
 
 INCLUDEPATH += logic
+INCLUDEPATH += gui
