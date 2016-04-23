@@ -9,15 +9,33 @@ ApplicationWindow
 {
     id: myWindow
     title: qsTr("How to solve an equation?")
-    width: 640
+    width: 1200
     height: 480
     visible: true
+
+    property var posX: 50
+    property var posY: 50
+    property var offset: 50
 
     EqnSideItem
     {
         id: left_side
 
-        polynom: "2*x-7"
-        polynomPosition: "50, 50"
+        Component.onCompleted:
+        {
+            left_side.polynom = "8*x-1"
+            left_side.polynomPosition = Qt.point(posX, posY)
+        }
+    }
+
+    EqnSideItem
+    {
+        id: right_side
+
+        Component.onCompleted:
+        {
+            right_side.polynom = "x+2"
+            right_side.polynomPosition = Qt.point(posX + left_side.getWidth() + offset, posY)
+        }
     }
 }

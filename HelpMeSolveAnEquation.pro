@@ -9,7 +9,7 @@ SOURCES += main.cpp \
     $${EQNITEMS_FOLDER}/PolynomialItem.cpp \
     $${EQNITEMS_FOLDER}/EqnSideItem.cpp \
     $${PARSER_FOLDER}/EqnItemTreeBuilder.cpp \
-    $${PARSER_FOLDER}/EqnGraphicalLayoutBuilder.cpp
+    $${EQNITEMS_FOLDER}/LayoutProperties.cpp
 
 RESOURCES += gui/qml.qrc
 
@@ -25,7 +25,7 @@ HEADERS += \
     $${EQNITEMS_FOLDER}/PolynomialItem.hpp \
     $${EQNITEMS_FOLDER}/EqnSideItem.hpp \
     $${PARSER_FOLDER}/EqnItemTreeBuilder.hpp \
-    $${PARSER_FOLDER}/EqnGraphicalLayoutBuilder.hpp
+    $${EQNITEMS_FOLDER}/LayoutProperties.hpp
 
 INCLUDEPATH += logic
 INCLUDEPATH += gui

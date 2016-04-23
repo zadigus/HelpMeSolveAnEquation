@@ -2,87 +2,97 @@
 
 #include <QDebug>
 
-namespace EqnItemTreeBuilder {
+namespace N_Builders {
 
-  //------------------------------------------------------------------------------------------------------
-  PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, QQuickItem* a_Parent) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
-  {
-    PolynomialItem* exprItem = new PolynomialItem(a_Parent);
-    exprItem->setBorderColor(QColor("blue"));
+  namespace EqnItemTreeBuilder {
 
-    // the first item has default operation + (any '-' sign should be read by the parseFactor method and would then update the EquationItem accordingly)
-    PolynomialItem* termItem(parseTerm(a_Eqn, a_Pos, exprItem));
-    termItem->setOp('+');
-
-    while(a_Pos < a_Eqn.size() && a_Eqn[a_Pos] != QChar::Null)
+    //------------------------------------------------------------------------------------------------------
+    PolynomialItem* parseExpression(const QString& a_Eqn, int& a_Pos, QQuickItem* a_Parent) // a_Pos is usually 0, but can be bigger in the case of complex expressions (with nested parentheses)
     {
-      QChar op(a_Eqn[a_Pos]);
-      qWarning() << "parseExpression::Operator " << op.toLatin1();
-      if(op != '+' && op != '-')
+      qInfo() << "Parsing expression";
+
+      PolynomialItem* exprItem = new PolynomialItem(a_Parent);
+      exprItem->setBorderColor(QColor("blue"));
+
+      // the first item has default operation + (any '-' sign should be read by the parseFactor method and would then update the EquationItem accordingly)
+      PolynomialItem* termItem(parseTerm(a_Eqn, a_Pos, exprItem));
+      termItem->setOp('+');
+
+      while(a_Pos < a_Eqn.size() && a_Eqn[a_Pos] != QChar::Null)
       {
-        return exprItem;
-      }
-      ++a_Pos;
+        QChar op(a_Eqn[a_Pos]);
+        qInfo() << "parseExpression::Operator " << op.toLatin1();
+        if(op != '+' && op != '-')
+        {
+          return exprItem;
+        }
+        ++a_Pos;
 
-      termItem = parseTerm(a_Eqn, a_Pos, exprItem);
-      termItem->setOp(op);
+        termItem = parseTerm(a_Eqn, a_Pos, exprItem);
+        termItem->setOp(op);
+      }
+
+      return exprItem;
     }
 
-    return exprItem;
-  }
-
-  //------------------------------------------------------------------------------------------------------
-  PolynomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent)
-  {
-    PolynomialItem* termItem = new PolynomialItem(a_Parent);
-    termItem->setBorderColor(QColor("green"));
-
-    // the first item has default operation *
-    PolynomialItem* factorItem(parseFactor(a_Eqn, a_Pos, termItem));
-    factorItem->setOp('*');
-
-    while(a_Pos < a_Eqn.size() && a_Eqn[a_Pos] != QChar::Null)
+    //------------------------------------------------------------------------------------------------------
+    PolynomialItem* parseTerm(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent)
     {
-      QChar op(a_Eqn[a_Pos]);
-      qWarning() << "parseTerm::Operator " << op.toLatin1();
-      if(op != '*' && op != '/')
+      qInfo() << "Parsing term";
+
+      PolynomialItem* termItem = new PolynomialItem(a_Parent);
+      termItem->setBorderColor(QColor("green"));
+
+      // the first item has default operation *
+      PolynomialItem* factorItem(parseFactor(a_Eqn, a_Pos, termItem));
+      factorItem->setOp('*');
+
+      while(a_Pos < a_Eqn.size() && a_Eqn[a_Pos] != QChar::Null)
       {
-        return termItem;
+        QChar op(a_Eqn[a_Pos]);
+        qInfo() << "parseTerm::Operator " << op.toLatin1();
+        if(op != '*' && op != '/')
+        {
+          return termItem;
+        }
+        ++a_Pos;
+
+        factorItem = parseFactor(a_Eqn, a_Pos, termItem);
+        factorItem->setOp(op);
       }
-      ++a_Pos;
 
-      factorItem = parseFactor(a_Eqn, a_Pos, termItem);
-      factorItem->setOp(op);
+      return termItem;
     }
 
-    return termItem;
-  }
-
-  //------------------------------------------------------------------------------------------------------
-  PolynomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent)
-  {
-    PolynomialItem* eqnItem = new PolynomialItem(a_Parent); // TODO: deal with the possibility that there is no factor ==> null pointer
-    eqnItem->setBorderColor(QColor("red"));
-
-    if(a_Eqn[a_Pos] == 'x')
+    //------------------------------------------------------------------------------------------------------
+    PolynomialItem* parseFactor(const QString& a_Eqn, int& a_Pos, PolynomialItem* a_Parent)
     {
-      qWarning() << "Read symbol x";
-      eqnItem->setText("x");
-      ++a_Pos;
-    }
-    else
-    {
-      QString result;
-      while(a_Pos < a_Eqn.size() && (a_Eqn[a_Pos].isDigit() || a_Eqn[a_Pos] == '.'))
+      qInfo() << "Parsing factor";
+
+      PolynomialItem* eqnItem = new PolynomialItem(a_Parent); // TODO: deal with the possibility that there is no factor ==> null pointer
+      eqnItem->setBorderColor(QColor("red"));
+
+      if(a_Eqn[a_Pos] == 'x')
       {
-        qWarning() << a_Eqn[a_Pos].toLatin1();
-        result += a_Eqn[a_Pos++];
+        qInfo() << "Read symbol x";
+        eqnItem->setText("x");
+        ++a_Pos;
       }
-      eqnItem->setText(result);
+      else
+      {
+        QString result;
+        while(a_Pos < a_Eqn.size() && (a_Eqn[a_Pos].isDigit() || a_Eqn[a_Pos] == '.'))
+        {
+          qInfo() << a_Eqn[a_Pos].toLatin1();
+          result += a_Eqn[a_Pos++];
+        }
+        eqnItem->setText(result);
+      }
+
+      // TODO: update the parent's sign if the factor is of the form (-x) or (-5) because the term's default sign is '+'
+      return eqnItem;
     }
 
-    // TODO: update the parent's sign if the factor is of the form (-x) or (-5) because the term's default sign is '+'
-    return eqnItem;
   }
 
 }
