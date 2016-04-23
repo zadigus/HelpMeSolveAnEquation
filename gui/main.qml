@@ -23,8 +23,8 @@ ApplicationWindow
 
         Component.onCompleted:
         {
-            left_side.polynom = "8*x-1"
-            left_side.polynomPosition = Qt.point(posX, posY)
+            left_side.expression = "8*x-1"
+            left_side.expressionPosition = Qt.point(posX, posY)
         }
     }
 
@@ -34,8 +34,8 @@ ApplicationWindow
 
         Component.onCompleted:
         {
-            right_side.polynom = "x+2"
-            right_side.polynomPosition = Qt.point(posX + left_side.getWidth() + offset, posY)
+            right_side.expression = "x+2"
+            right_side.expressionPosition = Qt.point(posX + left_side.getWidth() + offset, posY)
         }
     }
 }

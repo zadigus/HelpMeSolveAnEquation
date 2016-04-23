@@ -23,17 +23,17 @@ EqnSideItem
         }
     }
 
-    onPolynomPositionChanged:
+    onExpressionPositionChanged:
     {
-        console.info("New position = " + polynomPosition.x + ", " + polynomPosition.y)
+        console.info("New position = " + expressionPosition.x + ", " + expressionPosition.y)
     }
 
-    onPolynomChanged:
+    onExpressionChanged:
     {
         console.info("Building tree")
         buildTree()
         console.info("Building layout")
-        buildLayout(rootEqnItem(), polynomPosition.x, polynomPosition.y, myLayoutProps.polynomSize.width, myLayoutProps.polynomSize.height)
+        buildLayout(rootEqnItem(), expressionPosition.x, expressionPosition.y, myLayoutProps.polynomSize.width, myLayoutProps.polynomSize.height)
     }
 
     function buildLayout(item, x, y, w, h)

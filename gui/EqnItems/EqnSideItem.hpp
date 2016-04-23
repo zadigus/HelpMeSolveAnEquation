@@ -14,28 +14,28 @@ namespace N_EqnItems
   {
     Q_OBJECT
 
-    Q_PROPERTY(QString  polynom               READ polynom               WRITE setPolynom               NOTIFY polynomChanged)
-    Q_PROPERTY(QPointF  polynomPosition       READ polynomPosition       WRITE setPolynomPosition       NOTIFY polynomPositionChanged)
+    Q_PROPERTY(QString  expression            READ expression            WRITE setExpression            NOTIFY expressionChanged)
+    Q_PROPERTY(QPointF  expressionPosition    READ expressionPosition    WRITE setExpressionPosition    NOTIFY expressionPositionChanged)
 
     public:
       explicit EqnSideItem(QQuickItem* a_Parent = 0);
       ~EqnSideItem();
 
-      QString polynom() const;
-      void setPolynom(const QString& a_Polynom);
+      QString expression() const;
+      void setExpression(const QString& a_Expression);
 
-      QPointF polynomPosition() const;
-      void setPolynomPosition(const QPointF& a_Position);
+      QPointF expressionPosition() const;
+      void setExpressionPosition(const QPointF& a_Position);
 
     signals:
-      void polynomChanged();
-      void polynomPositionChanged();
+      void expressionChanged();
+      void expressionPositionChanged();
 
     public slots:
       void buildTree();
 
     private:
-      QString m_Polynom;
+      QString m_Expression;
 
       PolynomialItem* m_EqnItem;
   };
@@ -44,15 +44,15 @@ namespace N_EqnItems
   // inline / template method(s) implementation
   //--------------------------------------------------------------
 
-  inline QString EqnSideItem::polynom() const
+  inline QString EqnSideItem::expression() const
   {
-    return m_Polynom;
+    return m_Expression;
   }
 
-  inline void EqnSideItem::setPolynom(const QString& a_Polynom)
+  inline void EqnSideItem::setExpression(const QString& a_Expression)
   {
-    m_Polynom = a_Polynom;
-    emit polynomChanged();
+    m_Expression = a_Expression;
+    emit expressionChanged();
   }
 }
 

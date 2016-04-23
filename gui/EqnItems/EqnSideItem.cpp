@@ -24,18 +24,18 @@ namespace N_EqnItems
   }
 
   //------------------------------------------------------------------------------------------------------
-  QPointF EqnSideItem::polynomPosition() const
+  QPointF EqnSideItem::expressionPosition() const
   {
     return m_EqnItem != NULL ? m_EqnItem->position() : QPointF();
   }
 
   //------------------------------------------------------------------------------------------------------
-  void EqnSideItem::setPolynomPosition(const QPointF& a_Position)
+  void EqnSideItem::setExpressionPosition(const QPointF& a_Position)
   {
     if(m_EqnItem)
     {
       m_EqnItem->setPosition(a_Position);
-      emit polynomPositionChanged();
+      emit expressionPositionChanged();
     }
   }
 
@@ -49,7 +49,7 @@ namespace N_EqnItems
     {
       delete m_EqnItem;
     }
-    m_EqnItem = EqnItemTreeBuilder::parseExpression(m_Polynom, pos, this);
+    m_EqnItem = EqnItemTreeBuilder::parseExpression(m_Expression, pos, this);
   }
 
 }
