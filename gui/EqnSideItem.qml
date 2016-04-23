@@ -30,8 +30,8 @@ EqnSideItem
 
     onExpressionChanged:
     {
-        console.info("Building tree")
         buildTree()
+
         console.info("Building layout")
         buildLayout(rootEqnItem(), expressionPosition.x, expressionPosition.y, myLayoutProps.polynomSize.width, myLayoutProps.polynomSize.height)
     }
