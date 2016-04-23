@@ -23,11 +23,6 @@ EqnSideItem
         }
     }
 
-    function getWidth()
-    {
-        return myLayoutProps.polynomSize.width
-    }
-
     onPolynomPositionChanged:
     {
         console.info("New position = " + polynomPosition.x + ", " + polynomPosition.y)
@@ -39,11 +34,6 @@ EqnSideItem
         buildTree()
         console.info("Building layout")
         buildLayout(rootEqnItem(), polynomPosition.x, polynomPosition.y, myLayoutProps.polynomSize.width, myLayoutProps.polynomSize.height)
-    }
-
-    function rootEqnItem() // returns root PolynomialItem
-    {
-        return children[0]
     }
 
     function buildLayout(item, x, y, w, h)
@@ -85,6 +75,16 @@ EqnSideItem
             buildLayout(item.children[i], x, y, childWidth, childHeight)
             x += childWidth + space
         }
+    }
+
+    function getWidth()
+    {
+        return myLayoutProps.polynomSize.width
+    }
+
+    function rootEqnItem() // returns root PolynomialItem
+    {
+        return children[0]
     }
 
 }
