@@ -3,88 +3,98 @@ import EquationSolver 1.0
 
 EqnSideItem
 {
-    LayoutProperties
+  LayoutProperties
+  {
+    id: myLayoutProps
+
+    polynomSize: "500x100"
+    spaceBetweenItems: 10
+    verticalMargin: 15
+    horizontalMargin: 15
+
+    onLayoutChanged:
     {
-        id: myLayoutProps
+      console.info("size              = " + polynomSize.width + "x" + polynomSize.height)
+      console.info("spaceBetweenItems = " + spaceBetweenItems)
+      console.info("vertical margin   = " + verticalMargin)
+      console.info("horizontal margin = " + horizontalMargin)
 
-        polynomSize: "500x100"
-        spaceBetweenItems: 10
-        verticalMargin: 5
-        horizontalMargin: 5
+      parent.buildLayout()
+    }
+  }
 
-        onLayoutChanged:
-        {
-            console.info("size              = " + polynomSize.width + "x" + polynomSize.height)
-            console.info("spaceBetweenItems = " + spaceBetweenItems)
-            console.info("vertical margin   = " + verticalMargin)
-            console.info("horizontal margin = " + horizontalMargin)
+  onExpressionPositionChanged:
+  {
+    console.info("New position = " + expressionPosition.x + ", " + expressionPosition.y)
+  }
 
-            parent.buildLayout()
-        }
+  onExpressionChanged:
+  {
+    buildTree()
+
+    console.info("Building layout")
+
+    buildLayout(rootEqnItem(), expressionPosition.x, expressionPosition.y, myLayoutProps.polynomSize.width, myLayoutProps.polynomSize.height)
+  }
+
+  function buildLayout(item, x, y, w, h)
+  {
+    buildGeometry(item, x, y, w, h)
+    buildChildrenLayout(item, w, h)
+
+    // this must be called AFTER the children layout has been defined because
+    // this adds new children to the game
+
+    var component = Qt.createComponent("ExprItemMouseArea.qml")
+    var mouseArea = component.createObject(item)
+
+    component = Qt.createComponent("SignItem.qml")
+    var signItem = component.createObject(item)
+  }
+
+  function buildGeometry(item, x, y, w, h)
+  {
+    item.width = w
+    item.height = h
+    item.x = x
+    item.y = y
+  }
+
+  function buildChildrenLayout(item, w, h)
+  {
+    var nbrOfChildren = item.children.length
+
+    if(!nbrOfChildren)
+    {
+      return
     }
 
-    onExpressionPositionChanged:
+    var space   = myLayoutProps.spaceBetweenItems
+    var vMargin = myLayoutProps.verticalMargin
+    var hMargin = myLayoutProps.horizontalMargin
+
+    var totalOffsetSpace = (nbrOfChildren - 1) * space;
+    var childWidth       = (item.width - totalOffsetSpace - 2 * hMargin) / nbrOfChildren;
+    var childHeight      = item.height - 2 * vMargin;
+
+    var x = hMargin
+    var y = h / 2 - childHeight / 2
+
+    for(var i = 0; i < item.children.length; ++i)
     {
-        console.info("New position = " + expressionPosition.x + ", " + expressionPosition.y)
+      buildLayout(item.children[i], x, y, childWidth, childHeight)
+      x += childWidth + space
     }
+  }
 
-    onExpressionChanged:
-    {
-        buildTree()
+  function getWidth()
+  {
+    return myLayoutProps.polynomSize.width
+  }
 
-        console.info("Building layout")
-        buildLayout(rootEqnItem(), expressionPosition.x, expressionPosition.y, myLayoutProps.polynomSize.width, myLayoutProps.polynomSize.height)
-    }
-
-    function buildLayout(item, x, y, w, h)
-    {
-        buildGeometry(item, x, y, w, h)
-        buildChildrenLayout(item, w, h)
-    }
-
-    function buildGeometry(item, x, y, w, h)
-    {
-        item.width = w
-        item.height = h
-        item.x = x
-        item.y = y
-    }
-
-    function buildChildrenLayout(item, w, h)
-    {
-        var nbrOfChildren = item.children.length
-
-        if(!nbrOfChildren)
-        {
-            return
-        }
-
-        var space   = myLayoutProps.spaceBetweenItems
-        var vMargin = myLayoutProps.verticalMargin
-        var hMargin = myLayoutProps.horizontalMargin
-
-        var totalOffsetSpace = (nbrOfChildren - 1) * space;
-        var childWidth       = (item.width - totalOffsetSpace - 2 * hMargin) / nbrOfChildren;
-        var childHeight      = item.height - 2 * vMargin;
-
-        var x = hMargin
-        var y = h / 2 - childHeight / 2
-
-        for(var i = 0; i < item.children.length; ++i)
-        {
-            buildLayout(item.children[i], x, y, childWidth, childHeight)
-            x += childWidth + space
-        }
-    }
-
-    function getWidth()
-    {
-        return myLayoutProps.polynomSize.width
-    }
-
-    function rootEqnItem() // returns root PolynomialItem
-    {
-        return children[0]
-    }
+  function rootEqnItem() // returns root PolynomialItem
+  {
+    return children[0]
+  }
 
 }

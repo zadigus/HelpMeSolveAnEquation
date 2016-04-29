@@ -7,35 +7,31 @@ import QtQuick.Layouts 1.1
 
 ApplicationWindow
 {
-    id: myWindow
-    title: qsTr("How to solve an equation?")
-    width: 1200
-    height: 480
-    visible: true
+  id: myWindow
+  title: qsTr("How to solve an equation?")
+  width: 1200
+  height: 480
+  visible: true
 
-    property var posX: 50
-    property var posY: 50
-    property var offset: 50
+  property var posX: 50
+  property var posY: 50
+  property var offset: 50
 
-    EqnSideItem
-    {
-        id: left_side
+  EqnSideItem
+  {
+    id: left_side
 
-        Component.onCompleted:
-        {
-            left_side.expression = "8*x-1"
-            left_side.expressionPosition = Qt.point(posX, posY)
-        }
-    }
+    scale: 2
 
-    EqnSideItem
-    {
-        id: right_side
+    expression: "5*x-1"
+    expressionPosition: Qt.point(posX, posY)
+  }
 
-        Component.onCompleted:
-        {
-            right_side.expression = "x+2"
-            right_side.expressionPosition = Qt.point(posX + left_side.getWidth() + offset, posY)
-        }
-    }
+  EqnSideItem
+  {
+    id: right_side
+
+    expression: "6/x+2"
+    expressionPosition: Qt.point(posX + left_side.getWidth() + offset, posY)
+  }
 }

@@ -8,10 +8,13 @@ namespace N_EqnItems {
   //------------------------------------------------------------------------------------------------------
   PolynomialItem::PolynomialItem(QQuickItem *a_Parent)
     : QQuickPaintedItem(a_Parent)
+    , m_VERTICAL_MARGIN(10)
+    , m_HORIZONTAL_MARGIN(10)
+    , m_HORIZONTAL_OFFSET(5)
     , m_Color(QColor("black"))
     , m_Font(QFont("Arial", 16))
   {
-
+    connect(this, SIGNAL(borderColorChanged()), this, SLOT(update()));
   }
 
   //------------------------------------------------------------------------------------------------------
@@ -38,31 +41,6 @@ namespace N_EqnItems {
     a_Painter->setRenderHints(QPainter::Antialiasing, true);
     a_Painter->drawRect(0, 0, width(), height());
     drawText(a_Painter);
-  }
-
-  //------------------------------------------------------------------------------------------------------
-  void PolynomialItem::setText(const QString& a_Text)
-  {
-    m_Text      = a_Text;
-    emit textChanged();
-  }
-
-  //------------------------------------------------------------------------------------------------------
-  QColor PolynomialItem::borderColor() const
-  {
-    return m_Color;
-  }
-
-  //------------------------------------------------------------------------------------------------------
-  void PolynomialItem::setBorderColor(const QColor& a_Color)
-  {
-    m_Color = a_Color;
-  }
-
-  //------------------------------------------------------------------------------------------------------
-  void PolynomialItem::setOp(const QChar& a_Op)
-  {
-    m_Op = a_Op;
   }
 
 }

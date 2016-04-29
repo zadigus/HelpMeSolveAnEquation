@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>EqnSideItem.qml</file>
+        <file>ExprItemMouseArea.qml</file>
+        <file>SignItem.qml</file>
     </qresource>
 </RCC>

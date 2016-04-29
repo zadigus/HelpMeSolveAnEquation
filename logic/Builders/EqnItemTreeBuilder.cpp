@@ -12,7 +12,10 @@ namespace N_Builders {
       qInfo() << "Parsing expression";
 
       PolynomialItem* exprItem = new PolynomialItem(a_Parent);
+      exprItem->setExprType(QString("Expression"));
+      exprItem->setZ(-1);
       exprItem->setBorderColor(QColor("blue"));
+      exprItem->setOp('+');
 
       // the first item has default operation + (any '-' sign should be read by the parseFactor method and would then update the EquationItem accordingly)
       PolynomialItem* termItem(parseTerm(a_Eqn, a_Pos, exprItem));
@@ -41,6 +44,8 @@ namespace N_Builders {
       qInfo() << "Parsing term";
 
       PolynomialItem* termItem = new PolynomialItem(a_Parent);
+      termItem->setExprType(QString("Term"));
+      termItem->setZ(0);
       termItem->setBorderColor(QColor("green"));
 
       // the first item has default operation *
@@ -70,6 +75,8 @@ namespace N_Builders {
       qInfo() << "Parsing factor";
 
       PolynomialItem* eqnItem = new PolynomialItem(a_Parent); // TODO: deal with the possibility that there is no factor ==> null pointer
+      eqnItem->setExprType(QString("Factor"));
+      eqnItem->setZ(1);
       eqnItem->setBorderColor(QColor("red"));
 
       if(a_Eqn[a_Pos] == 'x')
