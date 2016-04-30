@@ -13,8 +13,8 @@ namespace N_EqnItems
   {
       Q_OBJECT
 
-      Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
-      Q_PROPERTY(QColor borderColor READ borderColor WRITE setBorderColor)
+      Q_PROPERTY(QString text         READ text         WRITE setText         NOTIFY textChanged)
+      Q_PROPERTY(QColor  borderColor  READ borderColor  WRITE setBorderColor)
 
     public:
       PolynomialItem(QQuickItem* a_Parent = 0);
