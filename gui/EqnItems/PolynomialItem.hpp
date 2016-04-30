@@ -13,16 +13,11 @@ namespace N_EqnItems
   {
       Q_OBJECT
 
-<<<<<<< HEAD
-      Q_PROPERTY(QString text         READ text         WRITE setText         NOTIFY textChanged)
-      Q_PROPERTY(QColor  borderColor  READ borderColor  WRITE setBorderColor)
-=======
       Q_PROPERTY(QString  text        READ text         WRITE setText         NOTIFY textChanged)
       Q_PROPERTY(QColor   borderColor READ borderColor  WRITE setBorderColor  NOTIFY borderColorChanged)
       Q_PROPERTY(QString  exprType    READ exprType     WRITE setExprType     NOTIFY exprTypeChanged)
       Q_PROPERTY(QFont    font        READ font         WRITE setFont         NOTIFY fontChanged)
       Q_PROPERTY(QChar    op          READ op           WRITE setOp           NOTIFY opChanged)
->>>>>>> origin/master
 
     public:
       PolynomialItem(QQuickItem* a_Parent = 0);
